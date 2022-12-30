@@ -1,7 +1,6 @@
 # QA_최종본
 
 pip install tensorflow_addons
-
 pip install sentencepiece
 
 # imports
@@ -55,13 +54,11 @@ with open(dev_json_path) as f:
     dev_json = json.load(f)
     print_json_tree(dev_json)
 
-"""- 원본"""
 
 print(json.dumps(train_json["data"][0:10], indent=2, ensure_ascii=False))
-
 print(json.dumps(dev_json["data"][130:140], indent=2, ensure_ascii=False))
 
-"""## KorQuAD 데이터셋 전처리 (1) 띄어쓰기 단위 정보관리"""
+# KorQuAD 데이터셋 전처리 (1) 띄어쓰기 단위 정보관리
 
 def _is_whitespace(c):
     if c == " " or c == "\t" or c == "\r" or c == "\n" or ord(c) == 0x202F:
@@ -140,7 +137,7 @@ for c, i in zip(list(string2), char_to_word):
 
 word_tokens, char_to_word
 
-"""## 데이터셋 전처리 (2) Tokenize by Vocab"""
+# 데이터셋 전처리 (2) Tokenize by Vocab
 
 # vocab loading
 vocab = spm.SentencePieceProcessor()
@@ -172,7 +169,7 @@ print(word_tokens)  # 처리해야 할 word 단위 입력
 context_tokens, word_to_token = _tokenize_vocab(vocab, word_tokens)
 context_tokens, word_to_token   # Subword 단위로 토큰화한 결과
 
-"""###KorQuAD 데이터셋 전처리 (3) Improve Span"""
+#KorQuAD 데이터셋 전처리 (3) Improve Span
 
 context = train_json['data'][0]['paragraphs'][0]['context']
 question = train_json['data'][0]['paragraphs'][0]['qas'][0]['question']
@@ -240,7 +237,7 @@ token_start, token_end = _improve_span(vocab, context_tokens, token_start, token
 print('token_start:', token_start, ' token_end:', token_end)
 context_tokens[token_start:token_end + 1]
 
-"""## 데이터셋 전처리 (4) 데이터셋 분리"""
+# 데이터셋 전처리 (4) 데이터셋 분리
 
 def dump_korquad(vocab, json_data, out_file):
     with open(out_file, "w") as f:
@@ -299,11 +296,12 @@ def print_file(filename, count=10):
                 break
             print(line.strip())
 
-print_file(data_dir + '/TRAIN_preprocessing.json') #####
+            
+            
+print_file(data_dir + '/TRAIN_preprocessing.json')
+print_file(data_dir + '/TEST_preprocessing.json')
 
-print_file(data_dir + '/TEST_preprocessing.json') #####
-
-"""## KorQuAD 데이터셋 전처리 (5) 데이터 분석 : Question"""
+# KorQuAD 데이터셋 전처리 (5) 데이터 분석 : Question
 
 questions = []
 contexts = []
@@ -379,7 +377,7 @@ plt.figure(figsize=(4, 6))
 plt.boxplot(train_question_counts, labels=['token counts'], showmeans=True)
 plt.show()
 
-"""## 데이터셋 전처리 (6) 데이터 분석 : Context"""
+# 데이터셋 전처리 (6) 데이터 분석 : Context
 
 # token count
 train_context_counts = [len(context) for context in contexts]
@@ -431,7 +429,7 @@ plt.figure(figsize=(4, 6))
 plt.boxplot(train_context_counts, labels=['token counts'], showmeans=True)
 plt.show()
 
-"""## 데이터셋 전처리 (7) 데이터 분석 : Answer"""
+# 데이터셋 전처리 (7) 데이터 분석 : Answer
 
 # token count
 train_answer_starts = token_starts
@@ -534,7 +532,7 @@ plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
 plt.show()
 
-"""## 데이터셋 전처리 (9) 데이터 로드"""
+# 데이터셋 전처리 (9) 데이터 로드
 
 train_json = os.path.join(data_dir + '/TRAIN_preprocessing.json')
 dev_json = os.path.join(data_dir + '/TEST_preprocessing.json')
