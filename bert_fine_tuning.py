@@ -1,7 +1,6 @@
-"""## BERT"""
+# BERT
 
 # 유틸리티 함수들
-
 def get_pad_mask(tokens, i_pad=0):
     """
     pad mask 계산하는 함수
@@ -404,8 +403,9 @@ class BERT(tf.keras.layers.Layer):
         embed = self.norm(embed)
         return embed
 
-"""### BERT 모델을 이용한 도전¶
+# BERT 모델을 이용한 도전
 
+"""
 BERT 모델을 활용하여, LSTM으로 풀어보았던 KorQuAD 태스크를 다시 학습해 보자.
 모델의 차이만 비교해 보기 위해 일부러 두 모델이 사용하는 Tokenizer를 동일하게 구성하다.
 아래는 BERT 레이어에 Fully Connected layer를 붙어 KorQuAD용으로 finetune하기 위한 모델 클래스이다.
@@ -524,15 +524,16 @@ for epoch in range(1): ########
         print(f'early stopping')
         break
 
-"""## 5. Pretrained model의 활용¶
+# 5. Pretrained model의 활용
 
+"""
 pretrained model을 활용해 보자.
 사용해야 할 모델 구조나 데이터셋 구조, 배치 구조는 이전 스텝과 동일하다.
 이미 다운로드한 pretrained model을 활용하는 학습을 다시 진행해 보자.
-
-## STEP 1. pretrained model 로딩하기
 """
 
+
+# pretrained model 로딩하기
 checkpoint_file = os.path.join(model_dir, 'bert_pretrain_32000.hdf5')
 
 with tf.device('device:GPU:0'):
@@ -551,7 +552,7 @@ if os.path.exists(checkpoint_file):
 else:
     print('NO Pretrained Model')
 
-"""## STEP 2. pretrained model finetune 하기"""
+# pretrained model finetune 하기
 
 loss_fn = tf.keras.losses.sparse_categorical_crossentropy
 acc_fn = tf.keras.metrics.sparse_categorical_accuracy
@@ -607,12 +608,9 @@ for epoch in range(5): # 총 20에폭
         print(f'early stopping')
         break
 
-"""## STEP 3. Inference 수행하기
-finetune 학습이 완료된 model을 활용하여 실제 퀴즈 풀이 결과를 확인해 보자
+# STEP 3. Inference 수행하기
 
-### 🔥
-"""
-
+# finetune 학습이 완료된 model을 활용하여 실제 퀴즈 풀이 결과를 확인해 보자
 def do_predict(model, question, context):
     """
     입력에 대한 답변 생성하는 함수
