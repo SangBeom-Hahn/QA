@@ -48,7 +48,10 @@ tensorflow==2.x
 tensorflow-GPU==2.x
 ```
 
-
+## reference
+- [BERT: Pre-training of Deep Bidirectional Transformers for
+Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)
+- [SQuAD: 100,000+ Questions for Machine Comprehension of Text](https://arxiv.org/pdf/1606.05250.pdf)
 
 ## Author
 
