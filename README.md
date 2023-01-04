@@ -57,5 +57,5 @@ Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)
 
 👤 **SangBoem-Hahn**
 
-- Github: [@SangBoem-Hahn](https://github.com/SangBoem-Hahn)
+- Github: [@SangBoem-Hahn](https://github.com/SangBeom-Hahn)
 - Blog : [Tistory(QA)](https://hsb422.tistory.com/entry/AI-hub%EC%9D%98-%EC%9D%BC%EB%B0%98%EC%83%81%EC%8B%9D-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-Question-Answering)
